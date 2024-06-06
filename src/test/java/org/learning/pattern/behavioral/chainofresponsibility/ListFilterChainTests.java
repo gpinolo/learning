@@ -20,14 +20,14 @@ class ListFilterChainTests {
     }
 
     private ListFilterChain createListFilterChain() {
-        IntegerListFilterChain listFilterChain = new IntegerListFilterChain();
+        ListFilterChain integerListFilterChain = new IntegerListFilterChain();
 
-        StringFilterChain stringFilterChain = new StringFilterChain();
-        listFilterChain.setNext(stringFilterChain);
+        ListFilterChain stringListFilterChain = new StringListFilterChain();
+        integerListFilterChain.setNext(stringListFilterChain);
 
-        BooleanFilterChain booleanFilterChain = new BooleanFilterChain();
-        stringFilterChain.setNext(booleanFilterChain);
+        ListFilterChain booleanListFilterChain = new BooleanListFilterChain();
+        stringListFilterChain.setNext(booleanListFilterChain);
 
-        return listFilterChain;
+        return integerListFilterChain;
     }
 }

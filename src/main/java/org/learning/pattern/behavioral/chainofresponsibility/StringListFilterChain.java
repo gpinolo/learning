@@ -1,8 +1,8 @@
 package org.learning.pattern.behavioral.chainofresponsibility;
 
-public class StringFilterChain extends ListFilterChain {
+public class StringListFilterChain extends ListFilterChain {
 
-    public StringFilterChain() {
+    public StringListFilterChain() {
         this.predicate = String.class::isInstance;
     }
 }
