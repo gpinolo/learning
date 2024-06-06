@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ListFilterChainTests {
 
     @Test
-    void enrichMessage() {
+    void doFilterTest() {
         ListFilterChain listFilterChain = createListFilterChain();
         double doubleValue = 1.9;
         List<Object> list = new ArrayList<>(Arrays.asList(true, 1, "ciao", doubleValue));
