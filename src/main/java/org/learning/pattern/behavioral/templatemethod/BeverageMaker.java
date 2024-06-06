@@ -1,5 +1,6 @@
 package org.learning.pattern.behavioral.templatemethod;
 
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public abstract class BeverageMaker {
@@ -21,7 +22,8 @@ public abstract class BeverageMaker {
     protected abstract Beverage ready();
 
     private void boilWater() {
-        LOGGER.info("boil water");
+        Level severe = Level.SEVERE;
+        LOGGER.log(severe, "boil water");
     }
 
     private void pourInCup() {
