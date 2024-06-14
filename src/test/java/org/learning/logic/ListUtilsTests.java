@@ -8,46 +8,80 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.learning.logic.ListUtils.*;
-import static org.learning.logic.ListUtils.isListOrderedStreamVersion;
+import static org.learning.logic.ListUtils.isListAscendingOrderStreamVersion;
 
 class ListUtilsTests {
 
     /**
-     * {@link ListUtils#isListOrdered(List)} tests
+     * {@link ListUtils#isListAscendingOrder(List)} tests
      */
 
     @Test
-    void isEmptyListOrdered() {
-        assertTrue(isListOrdered(Collections.emptyList()), "Empty list is ordered by api specification");
+    void isEmptyListAscendingOrdered() {
+        assertTrue(isListAscendingOrder(Collections.emptyList()), "Empty list is ordered by api specification");
     }
 
     @Test
-    void isNullListOrdered() {
-        assertTrue(isListOrdered(null), "Null list is ordered by api specification");
+    void isNullListAscendingOrdered() {
+        assertTrue(isListAscendingOrder(null), "Null list is ordered by api specification");
     }
 
     @Test
-    void isOneElementListListOrdered() {
-        assertTrue(isListOrdered(List.of(2)), "Null list is ordered by api specification");
+    void isOneElementListListAscendingOrdered() {
+        assertTrue(isListAscendingOrder(List.of(2)), "Null list is ordered by api specification");
     }
 
     @Test
-    void isOrderedElementListOrdered() {
-        assertTrue(isListOrdered(List.of(2, 4, 7, 10)), "Unexpected return for ordered element list");
+    void isOrderedElementListAscendingOrdered() {
+        assertTrue(isListAscendingOrder(List.of(2, 4, 7, 10)), "Unexpected return for ordered element list");
     }
 
     @Test
-    void isOrderedWithNullElementListOrdered() {
-        assertTrue(isListOrdered(Arrays.asList(2, null, 4, 7, 10)), "Unexpected return for ordered with null element list");
+    void isOrderedWithNullElementListAscendingOrdered() {
+        assertTrue(isListAscendingOrder(Arrays.asList(2, null, 4, 7, 10)), "Unexpected return for ordered with null element list");
     }
 
     @Test
-    void isUnorderedElementListOrdered() {
-        assertFalse(isListOrdered(Arrays.asList(2, null, 34, 7, 10)), "Unexpected return for unordered element list");
+    void isUnorderedElementListAscendingOrdered() {
+        assertFalse(isListAscendingOrder(Arrays.asList(2, null, 34, 7, 10)), "Unexpected return for unordered element list");
     }
 
     /**
-     * {@link ListUtils#isListOrderedStreamVersion(List)} tests
+     * {@link ListUtils#isListAscendingOrderStreamVersion(List)} tests
+     */
+
+    @Test
+    void isEmptyListAscendingOrderedStreamVersion() {
+        assertTrue(isListAscendingOrderStreamVersion(Collections.emptyList()), "Empt y list is ordered by api specification");
+    }
+
+    @Test
+    void isNullListAscendingOrderedStreamVersion() {
+        assertTrue(isListAscendingOrderStreamVersion(null), "Null list is ordered by api specification");
+    }
+
+    @Test
+    void isOneElementListListAscendingOrderedStreamVersion() {
+        assertTrue(isListAscendingOrderStreamVersion(List.of(2)), "Null list is ordered by api specification");
+    }
+
+    @Test
+    void isOrderedElementListAscendingOrderedStreamVersion() {
+        assertTrue(isListAscendingOrderStreamVersion(List.of(2, 4, 7, 10)), "Unexpected return for ordered element list");
+    }
+
+    @Test
+    void isOrderedWithNullElementListAscendingOrderedStreamVersion() {
+        assertTrue(isListAscendingOrderStreamVersion(Arrays.asList(2, null, 4, 7, 10)), "Unexpected return for ordered with null element list");
+    }
+
+    @Test
+    void isUnorderedElementListAscendingOrderedStreamVersion() {
+        assertFalse(isListAscendingOrderStreamVersion(Arrays.asList(2, null, 34, 7, 10)), "Unexpected return for unordered element list");
+    }
+
+    /**
+     * {@link ListUtils#isListOrderedStreamVersion(List)} (List)} tests
      */
 
     @Test
@@ -72,7 +106,7 @@ class ListUtilsTests {
 
     @Test
     void isOrderedWithNullElementListOrderedStreamVersion() {
-        assertTrue(isListOrderedStreamVersion(Arrays.asList(2, null, 4, 7, 10)), "Unexpected return for ordered with null element list");
+        assertTrue(isListOrderedStreamVersion(Arrays.asList(10, null, 8, 6, 4)), "Unexpected return for ordered with null element list");
     }
 
     @Test
@@ -87,6 +121,6 @@ class ListUtilsTests {
     void sortUnorderedListJDKVersion(){
         List<Integer> list = Arrays.asList(5, 1, 6);
         sortListJDKVersion(list);
-        assertTrue(isListOrderedStreamVersion(list));
+        assertTrue(isListAscendingOrderStreamVersion(list));
     }
 }
