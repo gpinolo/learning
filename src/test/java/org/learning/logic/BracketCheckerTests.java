@@ -6,12 +6,32 @@ import org.junit.jupiter.api.Test;
 class BracketCheckerTests {
 
     @Test
-    void isValidOK() {
+    void isValid() {
         assertTrue(BracketChecker.isValid("{([])}"), "Unexpected result");
     }
 
     @Test
-    void isValidKO() {
+    void isNotValidMissingClose() {
+        assertFalse(BracketChecker.isValid("("), "Unexpected result");
+    }
+
+    @Test
+    void isNotValidMissingOpen() {
+        assertFalse(BracketChecker.isValid(")"), "Unexpected result");
+    }
+
+    @Test
+    void isNotValidUnorderedToManyClose() {
+        assertFalse(BracketChecker.isValid("())"), "Unexpected result");
+    }
+
+    @Test
+    void isNotValidUnorderedToManyOpen() {
+        assertFalse(BracketChecker.isValid("(()"), "Unexpected result");
+    }
+
+    @Test
+    void isNotValidUnorderedSequence() {
         assertFalse(BracketChecker.isValid("{)(}"), "Unexpected result");
     }
 }
