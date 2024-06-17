@@ -1,20 +1,17 @@
 package org.learning.logic;
 
+import java.util.Collection;
 import java.util.Map;
+import java.util.Set;
 import java.util.Stack;
 
 public class BracketChecker {
 
-    private final static char OPEN_ROUND = '(';
-    private final static char OPEN_SQUARE = '[';
-    private final static char OPEN_CURLY = '{';
-    private final static char CLOSED_ROUND = ')';
-    private final static char CLOSED_SQUARE = ']';
-    private final static char CLOSED_CURLY = '}';
-
-    private final static Map<Character, Character> CLOSED_OPEN_BRACKET = Map.of(CLOSED_ROUND, OPEN_ROUND,
-                                                                                CLOSED_SQUARE, OPEN_SQUARE,
-                                                                                CLOSED_CURLY, OPEN_CURLY);
+    private final static Map<Character, Character> CLOSED_OPEN_BRACKET = Map.of(')', '(',
+                                                                                ']', '[',
+                                                                                '}', '{');
+    private final static Set<Character> CLOSED_BRACKET_SET = CLOSED_OPEN_BRACKET.keySet();
+    private final static Collection<Character> OPEN_BRACKET_COLLECTION = CLOSED_OPEN_BRACKET.values();
 
     /**
      * Check that the brackets `()`, `[]`and `{}` are correctly nested and balanced
@@ -25,21 +22,20 @@ public class BracketChecker {
         if(brackets==null){
             throw new IllegalArgumentException();
         }
+
         char[] charArray = brackets.toCharArray();
         Stack<Character> stack = new Stack<>();
         for (char c : charArray) {
-            switch (c) {
-                case OPEN_ROUND, OPEN_SQUARE, OPEN_CURLY -> stack.push(c);
-                case CLOSED_ROUND, CLOSED_SQUARE, CLOSED_CURLY -> {
-                    if(stack.isEmpty()){
-                        return false;
-                    }
-                    Character lastBracket = stack.pop();
-                    if (lastBracket != CLOSED_OPEN_BRACKET.get(c)) {
-                        return false;
-                    }
+            if(OPEN_BRACKET_COLLECTION.contains(c)){
+                stack.push(c);
+            }
+            else if(CLOSED_BRACKET_SET.contains(c)){
+                if (stack.isEmpty() || stack.pop() != CLOSED_OPEN_BRACKET.get(c)) {
+                    return false;
                 }
-                default -> throw new IllegalStateException("Unexpected char: " + c);
+            }
+            else{
+                throw new IllegalStateException("Unexpected char: " + c);
             }
         }
         return stack.isEmpty();
