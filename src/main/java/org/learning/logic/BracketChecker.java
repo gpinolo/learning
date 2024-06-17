@@ -7,11 +7,11 @@ import java.util.Stack;
 
 public class BracketChecker {
 
-    private final static Map<Character, Character> CLOSED_OPEN_BRACKET = Map.of(')', '(',
+    private final static Map<Character, Character> CHARACTER_CHARACTER_MAP = Map.of(')', '(',
                                                                                 ']', '[',
                                                                                 '}', '{');
-    private final static Set<Character> CLOSED_BRACKET_SET = CLOSED_OPEN_BRACKET.keySet();
-    private final static Collection<Character> OPEN_BRACKET_COLLECTION = CLOSED_OPEN_BRACKET.values();
+    private final static Set<Character> CLOSED_BRACKET_SET = CHARACTER_CHARACTER_MAP.keySet();
+    private final static Collection<Character> OPEN_BRACKET_COLLECTION = CHARACTER_CHARACTER_MAP.values();
 
     /**
      * Check that the brackets `()`, `[]`and `{}` are correctly nested and balanced
@@ -25,17 +25,17 @@ public class BracketChecker {
 
         char[] charArray = brackets.toCharArray();
         Stack<Character> stack = new Stack<>();
-        for (char c : charArray) {
-            if(OPEN_BRACKET_COLLECTION.contains(c)){
-                stack.push(c);
+        for (char bracket : charArray) {
+            if(OPEN_BRACKET_COLLECTION.contains(bracket)){
+                stack.push(bracket);
             }
-            else if(CLOSED_BRACKET_SET.contains(c)){
-                if (stack.isEmpty() || stack.pop() != CLOSED_OPEN_BRACKET.get(c)) {
+            else if(CLOSED_BRACKET_SET.contains(bracket)){
+                if (stack.isEmpty() || stack.pop() != CHARACTER_CHARACTER_MAP.get(bracket)) {
                     return false;
                 }
             }
             else{
-                throw new IllegalStateException("Unexpected char: " + c);
+                throw new IllegalStateException("Unexpected char: " + bracket);
             }
         }
         return stack.isEmpty();
